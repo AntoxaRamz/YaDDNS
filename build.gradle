@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+mainClassName = 'main.java.yaddns.Application'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+        compile 'org.json:json:20150729'
+}
+
+jar {
+    baseName = 'ddns'
+       
+    manifest {
+        attributes(
+            'Main-Class': 'main.java.yaddns.Application'
+        )
+    }
+ 
+   from configurations.compile.collect {
+        it.isDirectory() ? it : zipTree(it)
+   }
+}
