@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'application'
 
-mainClassName = 'main.java.yaddns.Application'
+mainClassName = 'yaddns.Application'
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ jar {
        
     manifest {
         attributes(
-            'Main-Class': 'main.java.yaddns.Application'
+            'Main-Class': 'yaddns.Application'
         )
     }
  

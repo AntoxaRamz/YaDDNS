@@ -1,4 +1,4 @@
-package main.java.yaddns;
+package yaddns;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -24,19 +24,16 @@ class Updater implements Runnable {
     @Override
     public void run() {
         String threadName = Thread.currentThread().getName();
-        log.info(threadName + ": start connecting '" + url + "?token=" + token + "'");
-
         try {
             URLConnection conn = new URL(url + "?token=" + token).openConnection();
             conn.setConnectTimeout(5 * 1000);
             conn.connect();
-            log.info("connect success");
+            String html = Application.readStreamToString(conn.getInputStream(), "UTF-8");
+            log.info(html);
         } catch (MalformedURLException e) {
             log.severe(threadName + ": Malformed url '" + url + "?token=" + token + "': " + e.getMessage());
         } catch (IOException e) {
             log.severe(threadName + ": Could not open url '" + url + "?token=" + token + "': " + e.getMessage());
         }
-
-        log.info(threadName + ": end connecting '" + url + "?token=" + token + "'");
     }
 }
